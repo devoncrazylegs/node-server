@@ -3,7 +3,7 @@ define([], function() {
 
     function config($routeProvider) {
         $routeProvider
-            .when('/', {templateUrl: '/templates/template.jade', controller: 'homeController'})
+            .when('/', {templateUrl: '/src/module1/templates/template.jade', controller: 'HomeController'})
             .otherwise({redirectTo: '/'});
     }
 

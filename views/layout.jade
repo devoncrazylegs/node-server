@@ -2,8 +2,10 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/css/style.css')
   body
     block content
 
-    script(type="text/javascript" src="/bower_components/requirejs/require.js" data-main="/main.js")
+    script(type="text/javascript" src="/bower_components/requirejs/require.js" data-main="/src/require.config.js")
+    script(type="text/javascript")
+        | window.appName='src/module1/module1';
