@@ -6,13 +6,17 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-var routes = require('./routes/dashboard');
-//var todos = require('./routes/todos');
+moduleRoutes = require('./routes');
 
+//Routes
+var routes = require('./routes/dashboard');
+var api = require('./routes/api');
+
+//Instantiate app
 var app = express();
 
 //mongoose
-mongoose.connect('mongodb://localhost/nodeMongo', function(err) {
+mongoose.connect('mongodb://localhost/beerlocker', function(err) {
   if(err) {
     console.log('connection error', err);
   } else {
@@ -35,8 +39,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'static')));
 app.use('/bower_components', express.static(__dirname + '/bower_components'));
 
-app.use('/', routes);
-//app.use('/todos', todos);
+app.use('/dashboard', routes);
+app.use('/api', api);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

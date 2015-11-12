@@ -2,8 +2,17 @@ var express = require('express');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get('/module1', function(req, res, next) {
+  res.render('index', { title: moduleRoutes.module1.title, appName: moduleRoutes.module1.appName});
+});
+
+router.get('/module2', function(req, res, next) {
+  res.render('index', { title: moduleRoutes.module2.title, appName: moduleRoutes.module2.appName});
+});
+
+//error handling
+router.get('*', function(req, res, next) {
+  res.render('error', { title: '404', message: 'Page not found'});
 });
 
 module.exports = router;
