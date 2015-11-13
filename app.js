@@ -1,3 +1,5 @@
+//http://scottksmith.com/blog/2014/05/29/beer-locker-building-a-restful-api-with-node-passport/
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -11,6 +13,7 @@ moduleRoutes = require('./routes');
 //Routes
 var routes = require('./routes/dashboard');
 var api = require('./routes/api');
+var users = require('./routes/users');
 
 //Instantiate app
 var app = express();
@@ -40,6 +43,7 @@ app.use(express.static(path.join(__dirname, 'static')));
 app.use('/bower_components', express.static(__dirname + '/bower_components'));
 
 app.use('/dashboard', routes);
+app.use('/users', users);
 app.use('/api', api);
 
 // catch 404 and forward to error handler

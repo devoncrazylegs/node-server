@@ -1,46 +1,30 @@
 var express = require('express');
 var router = express.Router();
-
-// Load MongoDB models
-var Beer = require('../models/Beer.js');
+var beerController = require('../controllers/beer');
 
 // Get all beers
 router.get('/beer', function(req, res, next) {
-    Beer.find(function(err, beers) {
-        if(err) {
-            res.send(err);s
-        } else {
-            res.json(beers);
-        }
-    });
+    beerController.getBeers(req, res);
 });
 
 // Get a single beer
 router.get('/beer/:beer_id', function(req, res, next) {
-    Beer.findById(req.params.beer_id, function(err, beer) {
-        if(err) {
-            res.send(err);
-        } else {
-            res.json(beer);
-        }
-    });
+    beerController.getBeer(req, res);
 });
 
 // Add a beer to the mongodb
-router.post('/beer', function(req, res, next) {
-    var beer = new Beer();
+router.post('/beer', function(req, res) {
+    beerController.getBeer(req, res);
+});
 
-    beer.name = req.body.name;
-    beer.type = req.body.type;
-    beer.quantity = req.body.quantity;
+// Update a beer
+router.put('/beer/:beer_id', function(req, res) {
+    beerController.getBeer(req, res);
+});
 
-    beer.save(function(err) {
-        if(err) {
-            res.send(err);
-        } else {
-            res.json({ message: 'Beer added to the locker!', data: beer });
-        }
-    });
+// Delete a beer
+router.put('/beer/:beer_id', function(req, res) {
+    beerController.deleteBeer(req, res);
 });
 
 module.exports = router;
