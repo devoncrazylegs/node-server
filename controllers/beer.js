@@ -5,9 +5,10 @@ var Beer = require('../models/Beer.js');
 exports.postBeers = function(req, res) {
     var beer = new Beer();
 
-    beer.name = req.body.name;
-    beer.type = req.body.type;
+    beer.name     = req.body.name;
+    beer.type     = req.body.type;
     beer.quantity = req.body.quantity;
+    beer.userId   = req.user._id;
 
     beer.save(function(err) {
         if(err) {
@@ -20,7 +21,7 @@ exports.postBeers = function(req, res) {
 
 // Get Beers
 exports.getBeers = function(req, res) {
-    Beer.find(function(err, beers) {
+    Beer.find({userId : req.user._id}, function(err, beers) {
         if(err) {
             res.send(err);s
         } else {
@@ -31,7 +32,7 @@ exports.getBeers = function(req, res) {
 
 // Get Beer
 exports.getBeer = function(req, res) {
-    Beer.findById(req.params.beer_id, function(err, beer) {
+    Beer.find({ userId : req.user._id, _id : req.params.beer_id}, function(err, beer) {
         if(err) {
             res.send(err);
         } else {
@@ -42,30 +43,27 @@ exports.getBeer = function(req, res) {
 
 // Put Beer
 exports.putBeer = function(req, res) {
-    Beer.findById(req.params.beer_id, function(err, beer) {
-        if(err) {
+    // Use the Beer model to find a specific beer
+    Beer.update({
+        userId : req.user._id,
+        _id    : req.params.beer_id
+    }, {
+        quantity : req.body.quantity
+    }, function(err, num, raw) {
+        if (err)
             res.send(err);
-        } else {
-            beer.quantity = req.body.quantity;
 
-            beer.save(function(err) {
-                if(err) {
-                    res.send(err);
-                } else {
-                    res.json(beer);
-                }
-            });
-        }
+        res.json({ message: num + ' updated' });
     });
 };
 
-// Delete Beer
+// Create endpoint /api/beers/:beer_id for DELETE
 exports.deleteBeer = function(req, res) {
-    Beer.findByIdAndRemove(req.params.beer_id, function(err, beer) {
-        if(err) {
+    // Use the Beer model to find a specific beer and remove it
+    Beer.remove({ userId: req.user._id, _id: req.params.beer_id }, function(err) {
+        if (err)
             res.send(err);
-        } else {
-            res.json({ message: "Beer has need removed" });
-        }
+
+        res.json({ message: 'Beer removed from the locker!' });
     });
 };

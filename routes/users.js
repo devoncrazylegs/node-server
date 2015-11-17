@@ -11,4 +11,8 @@ router.get('/', function(req, res, next) {
     userController.getUsers(req, res);
 });
 
+router.get('/:username', function(req, res, next) {
+    userController.getUser(req, res);
+});
+
 module.exports = router;

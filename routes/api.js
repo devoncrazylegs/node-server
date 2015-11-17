@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var beerController = require('../controllers/beer');
+var authController = require('../controllers/auth');
 
 // Get all beers
-router.get('/beer', function(req, res, next) {
+router.get('/beer', authController.isAuthenticated, function(req, res, next) {
     beerController.getBeers(req, res);
 });
 

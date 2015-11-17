@@ -27,3 +27,15 @@ exports.getUsers = function(req, res) {
         }
     });
 };
+
+exports.getUser = function(req, res) {
+    User.find({
+        username : req.params.username
+    }, function(err, user) {
+        if(err) {
+            res.send(err);
+        } else {
+            res.json(user);
+        }
+    });
+};
