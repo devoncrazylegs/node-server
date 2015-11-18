@@ -10,6 +10,10 @@ router.get('/module2', function(req, res, next) {
   res.render('index', { title: moduleRoutes.module2.title, appName: moduleRoutes.module2.appName});
 });
 
+router.get('/module3', function(req, res, next) {
+  res.render('index', { title: moduleRoutes.module3.title, appName: moduleRoutes.module3.appName });
+});
+
 //error handling
 router.get('*', function(req, res, next) {
   res.render('error', { title: '404', message: 'Page not found'});

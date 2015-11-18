@@ -5,6 +5,10 @@ module.exports = {
     },
     'module2' : {
         'title'   : 'Module 2',
-        'appName' : 'src/module1/module2'
+        'appName' : 'src/module2/module2'
+    },
+    'module3' : {
+        'title'   : 'Module 3',
+        'appName' : 'src/module3/module3'
     }
 };
