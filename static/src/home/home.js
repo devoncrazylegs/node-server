@@ -1,19 +1,18 @@
 'use strict';
 (function() {
     define([
-        'src/module2/config',
-        'src/module2/controllers/HomeController',
+        'src/home/config',
+        'src/module1/controllers/HomeController',
         'ngRoute'
     ], function(
         config,
         HomeController
     ) {
-        var appName = 'module1';
+        var appName = 'home';
         var app = angular.module(appName, ['ngRoute']);
-        app.controller('HomeController', HomeController);
+            app.controller('HomeController', HomeController);
 
         app.config(config);
-
         return appName;
     });
 })();

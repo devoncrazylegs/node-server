@@ -1,4 +1,8 @@
 module.exports = {
+    'home' : {
+        'title'   : 'Home',
+        'appName' : 'src/home/home'
+    },
     'module1' : {
         'title'   : 'Module 1',
         'appName' : 'src/module1/module1'

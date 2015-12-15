@@ -1,7 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.render('index', {title: moduleRoutes.home.title, appName: moduleRoutes.home.appName});
+});
+
 router.get('/module1', function(req, res, next) {
   res.render('index', { title: moduleRoutes.module1.title, appName: moduleRoutes.module1.appName});
 });
